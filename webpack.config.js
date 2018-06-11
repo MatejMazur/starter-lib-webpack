@@ -1,12 +1,14 @@
 import path from 'path';
 import nodeExternals from 'webpack-node-externals';
 
+const env = process.env.NODE_ENV;
+
 export default {
-  mode: process.env.NODE_ENV,
+  mode: env,
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: env === 'production' ? '[name].[hash].js' : '[name].js',
     libraryTarget: 'commonjs'
   },
   module: {
